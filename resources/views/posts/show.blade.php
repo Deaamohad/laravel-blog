@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $post->title)
-
 @section('main')
 
-<div class="link"><a href="{{ route('posts.index') }}">Home Page</a></div>
+<div class="link"><a href="{{ route('posts.index') }}">← Home Page</a></div>
+
+<div class="mb-4 text-2xl text-blue-950">{{ $post->user->name }}</div>
+
+<div class="text-3xl mb-4">{{ $post->title }}</div>
 
 <div class="mb-4">{{ $post->content }}</div>
 

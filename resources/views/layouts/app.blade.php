@@ -13,11 +13,14 @@
             label {
                 @apply mb-4;
             }
-            input[type="text"], textarea {
+            input[type="text"], input[type="password"], textarea {
                 @apply block rounded border mb-2 w-full flex-1 border-slate-400;
             }
             .link {
                 @apply mb-5 text-lg font-semibold text-gray-700 hover:text-blue-600;
+            }
+            .success {
+                @apply rounded border p-3 mb-8 text-green-700 bg-green-100
             }
         }
     </style>
@@ -26,7 +29,7 @@
     <h1 class="text-3xl mb-4">@yield('title')</h1>
     <div>
         @if(session('success'))
-            <div class="rounded border p-3 mb-8 text-green-700 bg-green-100">
+            <div class="success">
                 <p class="text-lg">Success!</p>
                 <p>{{ session('success') }}</p>
             </div>

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +25,8 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(7),
             'created_at' => $created,
-            'updated_at'   => fake()->dateTimeBetween($created, 'now'), 
+            'updated_at' => fake()->dateTimeBetween($created, 'now'),
+            'user_id' =>  User::factory()
             ];
     }
 }
