@@ -4,6 +4,8 @@
 
 @section('main')
 
+<div class="link mb-4"><a href="{{ route('posts.index') }}">← Back to Posts</a></div>
+
     <form action="{{ route('posts.update', $post) }}" method="POST">
         @csrf
         @method('PUT')

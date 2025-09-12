@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -32,13 +34,15 @@ class PostController extends Controller
             'content' => 'required|string',
         ]);
 
-        $post = Post::create([
+        $post = Auth::user()->posts()->create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
         ]);
 
         return redirect()->route('posts.show', $post)
             ->with('success', 'Post created successfully!');
+
+        
     }
 
     public function edit(Post $post) {

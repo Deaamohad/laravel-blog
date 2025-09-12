@@ -4,6 +4,8 @@
 
 @section('main')
 
+<div class="link mb-4"><a href="{{ route('posts.index') }}">← Back to Posts</a></div>
+
 <form action="{{ route('posts.store') }}" method="POST">
     @csrf
     <div>
@@ -22,7 +24,6 @@
     </div>
     <div class="flex gap-2 mt-4">
         <button type="submit" class="btn">Create Post</button>
-        <a href="{{ route('posts.index') }}" class="btn">Cancel</a>
     </div>    
 
 </form>

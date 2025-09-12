@@ -2,7 +2,7 @@
 
 @section('main')
 
-<div class="link"><a href="{{ route('posts.index') }}">← Home Page</a></div>
+<div class="link mb-4"><a href="{{ route('posts.index') }}">← Back to Posts</a></div>
 
 <div class="mb-4 text-2xl text-blue-950">{{ $post->user->name }}</div>
 
@@ -15,6 +15,9 @@
         Posted at {{ $post->created_at->diffForHumans() }} • Updated at {{ $post->updated_at->diffForHumans() }}
     </div>
 
+
+    @auth
+    @if (auth()->id() === $post->user_id)
     <div class="flex gap-1">
         <form action="{{ route('posts.destroy', $post) }}" method="POST" class="inline">
             @csrf
@@ -29,6 +32,9 @@
             </button>
         </a>
     </div>
+    @endif
+    @endauth
+
 </div>
 
 @endsection

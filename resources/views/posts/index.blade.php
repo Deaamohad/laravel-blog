@@ -4,7 +4,9 @@
 
 @section('main')
     
-<div class="link"><a href="{{ route('posts.create') }}">Create a Post</a></div>
+@auth
+    <div class="link"><a href="{{ route('posts.create') }}">Create a Post</a></div>
+@endauth
 
 <div class="flex flex-wrap gap-4">
     @foreach ($posts as $post)
