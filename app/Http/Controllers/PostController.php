@@ -20,6 +20,9 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post) {
+
+        $this->authorize('delete', $post);
+
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
@@ -46,10 +49,19 @@ class PostController extends Controller
     }
 
     public function edit(Post $post) {
+
+        try {
+            $this->authorize('update', $post);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->route('posts.index')
+                ->with('error', 'You are not allowed to edit this post.');
+        }
+        
         return view('posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post) {
+
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
