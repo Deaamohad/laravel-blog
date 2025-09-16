@@ -6,26 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
 
-/**
- * @property int $id
- * @property string $title
- * @property string $content
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $user_id
- * @property-read \App\Models\User|null $user
- * @method static \Database\Factories\PostFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Post whereUserId($value)
- * @mixin \Eloquent
- */
 class Post extends Model
 {
     use HasFactory;
@@ -40,7 +20,8 @@ class Post extends Model
         'user_id'
     ];
 
-    public function scopeTitle(Builder $query, string $title) : Builder {
-        return $query->where('title', 'LIKE', "%$title%");
+    public function scopeTitle(Builder $query, string $search) : Builder {
+        return $query->where('title', 'LIKE', "%$search%")->orWhere('content', 'LIKE', "%$search%");
     }
+
 }

@@ -18,8 +18,18 @@
         @endauth
     </div>
 @endsection
-
 @section('main')
+
+    <form action="{{ route('posts.index')}}" method="GET">
+        <div class="flex gap-6">
+            <input class="w-full px-4 py-2 border rounded-lg shadow-sm border-gray-300" 
+            type="text" name="search" placeholder="Search..."
+            value="{{ request('search')}}" >
+            <button class="text-lg px-6 btn bg-white text-gray-700 border-gray-300 hover:bg-gray-50 focus:ring-blue-500" type="submit">
+                Search</button>
+        </div>
+    </form>
+
     @if($posts->count() > 0)
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
             @foreach ($posts as $post)

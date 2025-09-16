@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     
-    public function index() {
-        $posts = Post::latest()->get();
+    public function index(Request $request) {
+        $query = Post::latest();
+        if ($request->has('search') && $request->search != '') {
+            $query->title($request->search);
+        }
+        $posts = $query->get();
         return view('posts.index', compact('posts'));
     }
 
