@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Comment;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -20,7 +22,10 @@ class PostController extends Controller
     }
 
     public function show(Post $post) {
-        return view('posts.show', compact('post'));
+        
+        $comments = $post->comments()->with('user')->get();
+
+        return view('posts.show', compact('post', 'comments'));
     }
 
     public function destroy(Post $post) {

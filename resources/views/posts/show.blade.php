@@ -42,13 +42,9 @@
         <div class="card-header">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <span class="text-blue-600 font-semibold">
-                            {{ substr($post->user->name, 0, 1) }}
-                        </span>
-                    </div>
+                     <x-avatar :name="$post->user->name"/>
                     <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">{{ $post->user->name }}</p>
+                        <p class="text-sm font-bold text-gray-900">{{ $post->user->name }}</p>
                         <div class="post-meta">
                             <time>Published {{ $post->created_at->diffForHumans() }}</time>
                             @if($post->created_at != $post->updated_at)
@@ -68,5 +64,30 @@
                 <div class="post-content whitespace-pre-line break-words overflow-wrap-anywhere">{{ $post->content }}</div>
             </div>
         </div>
+
+        <div class="comment-header">
+            <x-avatar :name="$post->user->name"/>
+            <form action="" class="flex-1">
+        <textarea
+            class="resize-none overflow-hidden px-5 py-1.5 border-2 w-full rounded-2xl"
+            rows="1"
+            placeholder="Comment..."
+            autocomplete="off"
+            oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'"></textarea>
+            </form>
+        </div>
+
+        @foreach ($comments as $comment)
+            
+        <div class="comments">
+            <x-avatar :name="$comment->user->name" :margin="2"/>
+                <div class="bg-blue-50 rounded-2xl py-1.5 px-4 break-words max-w-[92%]">
+                    <p class="mb-1 font-bold">{{ $comment->user->name }}</p>
+                    <p>{{ $comment->body }}</p>
+                </div>
+        </div>
+
+        @endforeach
     </article>
+        
 @endsection

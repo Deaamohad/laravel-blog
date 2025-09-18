@@ -43,6 +43,14 @@
                 @apply p-6;
             }
             
+            .comment-header {
+                @apply px-6 py-4 border-t border-gray-100 bg-gray-50 drop-shadow-xl ring-gray-700 flex gap-3 items-center;
+            }
+
+            .comments {
+                @apply px-6 py-4 border-t border-gray-100 bg-gray-50 drop-shadow-xl ring-gray-700 flex gap-3 items-start;
+            }
+
             .form-input {
                 @apply block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out;
             }

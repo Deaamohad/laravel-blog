@@ -24,7 +24,8 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(7),
-            'created_at' => $created,
+            // 'created_at' => $created,
+            'created_at' => now(),
             'updated_at' => fake()->dateTimeBetween($created, 'now'),
             'user_id' =>  User::factory()
             ];
