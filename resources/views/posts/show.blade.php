@@ -65,25 +65,42 @@
             </div>
         </div>
 
+        @auth
         <div class="comment-header">
-            <x-avatar :name="$post->user->name"/>
-            <form action="" class="flex-1">
-        <textarea
-            class="resize-none overflow-hidden px-5 py-1.5 border-2 w-full rounded-2xl"
+            <x-avatar :name="auth()->user()->name" :margin="0" />
+            <form action="{{ route('comments.store', $post) }}" method="POST" class="justify-center w-full flex flex-col">
+                @csrf
+            <div class="relative">
+            <textarea
+            class="resize-none overflow-hidden px-5 pr-12 py-3 min-h-[45px] border-2 w-full rounded-2xl"
             rows="1"
             placeholder="Comment..."
             autocomplete="off"
-            oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'"></textarea>
-            </form>
+            name="body"
+            oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'"
+            onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); this.form.submit(); }"></textarea>
+ 
+                        <button type="submit" class="absolute right-3 bottom-[11px] w-8 h-8 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white shadow-sm transition-all duration-200 ease-in-out hover:shadow">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+        </form>
         </div>
+        @endauth
 
         @foreach ($comments as $comment)
             
         <div class="comments">
             <x-avatar :name="$comment->user->name" :margin="2"/>
-                <div class="bg-blue-50 rounded-2xl py-1.5 px-4 break-words max-w-[92%]">
-                    <p class="mb-1 font-bold">{{ $comment->user->name }}</p>
-                    <p>{{ $comment->body }}</p>
+                <div class="bg-blue-50 rounded-2xl py-2.5 px-4 break-words max-w-[92%]">
+                    <div class="flex items-center justify-between mb-1">
+                        <p class="font-bold">{{ $comment->user->name }}</p>
+                        <span class="text-xs text-gray-500 ml-2.5">{{ $comment->created_at->diffForHumans() }}</span>
+                    </div>
+                    <p class="min-h-[20px]">{{ $comment->body }}</p>
                 </div>
         </div>
 

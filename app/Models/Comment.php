@@ -19,4 +19,10 @@ class Comment extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = [
+        'body',
+        'post_id',
+        'user_id',
+    ];
 }

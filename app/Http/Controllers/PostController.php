@@ -22,8 +22,8 @@ class PostController extends Controller
     }
 
     public function show(Post $post) {
-        
-        $comments = $post->comments()->with('user')->get();
+
+        $comments = $post->comments()->latest()->with('user')->get();
 
         return view('posts.show', compact('post', 'comments'));
     }

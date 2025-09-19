@@ -44,7 +44,7 @@
             }
             
             .comment-header {
-                @apply px-6 py-4 border-t border-gray-100 bg-gray-50 drop-shadow-xl ring-gray-700 flex gap-3 items-center;
+                @apply px-6 py-4 border-t border-gray-100 bg-gray-50 drop-shadow-xl ring-gray-700 flex gap-3;
             }
 
             .comments {
