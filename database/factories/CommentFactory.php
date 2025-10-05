@@ -23,7 +23,7 @@ class CommentFactory extends Factory
             'body' => fake()->sentence(),
             'post_id' => Post::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
-            'created_at' => fake()->dateTimeBetween(),
+            'created_at' => fake()->dateTimeBetween(Post::inRandomOrder()->first()->created_at, 'now'),
             'updated_at' => now(),
         ];
     }
