@@ -12,7 +12,7 @@
         </a>
         
         @auth
-            @if (auth()->id() === $post->user_id)
+            @if (auth()->id() == $post->user_id)
                 <div class="flex space-x-3">
                     <a href="{{ route('posts.edit', $post) }}" class="btn-secondary">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
