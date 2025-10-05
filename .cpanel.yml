@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/deaaupyx/laravel_blog
+    - /bin/cp -R $(find . -maxdepth 1 ! -name ".git" ! -name "node_modules" ! -name ".cpanel.yml" ! -name ".env") $DEPLOYPATH
+    - cd $DEPLOYPATH
+    - composer install --no-dev --optimize-autoloader
+    - php artisan migrate --force
+    - php artisan config:cache
+    - php artisan route:cache
+    - php artisan view:cache
